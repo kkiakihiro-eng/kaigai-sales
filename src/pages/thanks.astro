@@ -1,0 +1,49 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="お問い合わせありがとうございます">
+  <section class="min-h-[60vh] flex items-center justify-center">
+    <div class="max-w-xl mx-auto px-4 text-center py-20">
+      <div class="text-6xl mb-6">&#9989;</div>
+      <h1 class="text-2xl md:text-3xl font-bold mb-4">お問い合わせありがとうございます</h1>
+      <p class="text-muted mb-8 leading-relaxed">
+        内容を確認のうえ、担当者より<strong>1営業日以内</strong>にご連絡いたします。<br />
+        しばらくお待ちください。
+      </p>
+
+      <div class="bg-primary-light rounded-xl p-6 mb-8 text-left">
+        <h2 class="font-bold text-lg mb-3">次のステップ</h2>
+        <ul class="space-y-2 text-sm text-muted">
+          <li class="flex items-start gap-2">
+            <span class="text-primary font-bold">1.</span>
+            担当者からメールまたはお電話でご連絡します
+          </li>
+          <li class="flex items-start gap-2">
+            <span class="text-primary font-bold">2.</span>
+            御社の課題・ターゲット市場についてヒアリング（30分程度）
+          </li>
+          <li class="flex items-start gap-2">
+            <span class="text-primary font-bold">3.</span>
+            最適なプランをご提案 → 最短2週間で営業開始
+          </li>
+        </ul>
+      </div>
+
+      <a href="/" class="inline-flex items-center justify-center bg-primary hover:bg-primary-dark text-white font-bold py-3 px-8 rounded-lg transition-colors">
+        トップページに戻る
+      </a>
+    </div>
+  </section>
+
+  <!-- GA4 conversion tracking -->
+  <script is:inline>
+    if (typeof gtag === 'function') {
+      gtag('event', 'generate_lead', {
+        event_category: 'contact',
+        event_label: 'form_submission',
+        value: 1
+      });
+    }
+  </script>
+</BaseLayout>

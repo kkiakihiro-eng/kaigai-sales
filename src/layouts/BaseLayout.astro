@@ -122,6 +122,7 @@ const googleSiteVerification = import.meta.env.PUBLIC_GOOGLE_SITE_VERIFICATION;
   <Footer />
 
   <script>
+    // Scroll reveal animation
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
@@ -131,6 +132,19 @@ const googleSiteVerification = import.meta.env.PUBLIC_GOOGLE_SITE_VERIFICATION;
     }, { threshold: 0.1 });
 
     document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+
+    // GA4 CTA click tracking
+    document.querySelectorAll('a[href="#contact"]').forEach((cta) => {
+      cta.addEventListener('click', () => {
+        if (typeof gtag === 'function') {
+          gtag('event', 'cta_click', {
+            event_category: 'engagement',
+            event_label: cta.textContent?.trim() || 'CTA',
+            value: 1
+          });
+        }
+      });
+    });
   </script>
 </body>
 </html>

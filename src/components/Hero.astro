@@ -47,6 +47,18 @@
           <span>専門チーム体制</span>
         </div>
       </div>
+
+      <!-- Client trust indicators -->
+      <div class="mt-10 pt-8 border-t border-white/10">
+        <p class="text-xs text-white/40 mb-4">取引実績のある業種</p>
+        <div class="flex flex-wrap gap-3">
+          {['製造業', '食品メーカー', 'IT企業', 'HR・人材', 'マーケティング', '貿易・商社'].map(industry => (
+            <span class="px-3 py-1.5 bg-white/5 border border-white/10 rounded-full text-xs text-white/50">
+              {industry}
+            </span>
+          ))}
+        </div>
+      </div>
     </div>
   </div>
 </section>
