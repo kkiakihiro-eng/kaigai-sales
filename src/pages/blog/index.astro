@@ -1,0 +1,45 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import BlogCard from '../../components/BlogCard.astro';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('blog')).sort(
+  (a, b) => new Date(b.data.publishDate).getTime() - new Date(a.data.publishDate).getTime()
+);
+---
+
+<BaseLayout
+  title="ブログ | 海外セールスくん"
+  description="海外営業・ASEAN市場進出に関するノウハウ、事例、補助金情報を発信しています。"
+>
+  <section class="pt-32 pb-20 px-4">
+    <div class="max-w-4xl mx-auto">
+      <div class="text-center mb-12">
+        <span class="text-sm text-primary font-bold uppercase tracking-wider">Blog</span>
+        <h1 class="text-2xl md:text-3xl font-bold mt-2 mb-4">海外営業ノウハウブログ</h1>
+        <p class="text-muted max-w-2xl mx-auto">ASEAN市場への海外進出・営業代行に役立つ情報を発信しています</p>
+      </div>
+
+      {posts.length === 0 ? (
+        <p class="text-center text-muted">記事の準備中です。</p>
+      ) : (
+        <div class="grid md:grid-cols-2 gap-6">
+          {posts.map(post => (
+            <BlogCard
+              title={post.data.title}
+              description={post.data.description}
+              slug={post.id}
+              publishDate={post.data.publishDate}
+              category={post.data.category}
+              tags={post.data.tags}
+            />
+          ))}
+        </div>
+      )}
+
+      <div class="text-center mt-12">
+        <a href="/" class="text-primary font-bold hover:underline">&larr; トップページに戻る</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

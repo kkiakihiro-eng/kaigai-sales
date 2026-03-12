@@ -1,0 +1,30 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  slug: string;
+  publishDate: string;
+  category: string;
+  tags?: string[];
+}
+
+const { title, description, slug, publishDate, category, tags = [] } = Astro.props;
+---
+
+<a href={`/blog/${slug}`} class="block bg-white border border-border rounded-xl overflow-hidden hover:shadow-lg transition-shadow group">
+  <div class="p-6">
+    <div class="flex items-center gap-3 mb-3">
+      <span class="text-xs font-bold text-primary bg-primary-light px-3 py-1 rounded-full">{category}</span>
+      <time class="text-xs text-muted">{publishDate}</time>
+    </div>
+    <h3 class="font-bold text-lg mb-2 group-hover:text-primary transition-colors line-clamp-2">{title}</h3>
+    <p class="text-muted text-sm leading-relaxed line-clamp-3">{description}</p>
+    {tags.length > 0 && (
+      <div class="flex flex-wrap gap-2 mt-3">
+        {tags.slice(0, 3).map(tag => (
+          <span class="text-xs text-muted bg-bg-alt px-2 py-0.5 rounded">#{tag}</span>
+        ))}
+      </div>
+    )}
+  </div>
+</a>

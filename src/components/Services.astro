@@ -1,0 +1,77 @@
+---
+// ServiceOverview + ServiceDetails - What is 海外セールスくん
+---
+
+<section id="service" class="reveal">
+  <div class="max-w-6xl mx-auto px-4">
+    <div class="text-center mb-12">
+      <span class="text-sm text-primary font-bold uppercase tracking-wider">Service</span>
+      <h2 class="text-2xl md:text-3xl font-bold mt-2 mb-4">海外セールスくんとは？</h2>
+      <p class="text-muted max-w-2xl mx-auto">
+        御社の"海外営業部"を月額制で提供するサービスです。<br />
+        営業リスト作成から商談セッティングまで、ASEAN専門チームがワンストップで代行します。
+      </p>
+    </div>
+
+    <!-- Key numbers -->
+    <div class="grid grid-cols-3 gap-4 max-w-3xl mx-auto mb-16">
+      <div class="text-center p-6 bg-primary-light rounded-xl">
+        <p class="text-3xl md:text-4xl font-bold text-primary">20万件+</p>
+        <p class="text-sm text-muted mt-1">ASEANデータベース</p>
+      </div>
+      <div class="text-center p-6 bg-primary-light rounded-xl">
+        <p class="text-3xl md:text-4xl font-bold text-primary">5カ国</p>
+        <p class="text-sm text-muted mt-1">対応エリア</p>
+      </div>
+      <div class="text-center p-6 bg-primary-light rounded-xl">
+        <p class="text-3xl md:text-4xl font-bold text-primary">30名</p>
+        <p class="text-sm text-muted mt-1">専門チーム</p>
+      </div>
+    </div>
+
+    <!-- Service details -->
+    <div class="grid md:grid-cols-3 gap-8">
+      <div class="text-center">
+        <div class="w-16 h-16 bg-primary-light rounded-2xl flex items-center justify-center mx-auto mb-4">
+          <span class="text-primary text-2xl font-bold">1</span>
+        </div>
+        <h3 class="font-bold text-lg mb-3">営業リスト作成</h3>
+        <p class="text-muted text-sm leading-relaxed">
+          ASEAN20万件のデータベースから、御社の製品・サービスに最適なターゲット企業をリストアップ。業種・規模・地域で絞り込み。
+        </p>
+      </div>
+
+      <div class="text-center">
+        <div class="w-16 h-16 bg-primary-light rounded-2xl flex items-center justify-center mx-auto mb-4">
+          <span class="text-primary text-2xl font-bold">2</span>
+        </div>
+        <h3 class="font-bold text-lg mb-3">アプローチ代行</h3>
+        <p class="text-muted text-sm leading-relaxed">
+          電話・メール・SNSで現地語でアプローチ。バイリンガルの営業スタッフが、御社に代わって商談の糸口を作ります。
+        </p>
+      </div>
+
+      <div class="text-center">
+        <div class="w-16 h-16 bg-primary-light rounded-2xl flex items-center justify-center mx-auto mb-4">
+          <span class="text-primary text-2xl font-bold">3</span>
+        </div>
+        <h3 class="font-bold text-lg mb-3">商談セッティング</h3>
+        <p class="text-muted text-sm leading-relaxed">
+          興味を持った企業との商談日程を調整し、オンラインまたは現地での商談をセッティング。月次レポートで進捗を可視化。
+        </p>
+      </div>
+    </div>
+
+    <!-- Supported countries -->
+    <div class="mt-16 text-center">
+      <h3 class="font-bold text-lg mb-6">対応エリア</h3>
+      <div class="flex flex-wrap justify-center gap-4">
+        {['タイ', 'ベトナム', 'フィリピン', 'インドネシア', 'マレーシア'].map(country => (
+          <span class="px-4 py-2 bg-primary-light text-primary rounded-full text-sm font-medium">
+            {country}
+          </span>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>

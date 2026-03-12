@@ -1,0 +1,39 @@
+---
+// Flow section - Steps to get started
+---
+
+<section id="flow" class="reveal">
+  <div class="max-w-6xl mx-auto px-4">
+    <div class="text-center mb-12">
+      <span class="text-sm text-primary font-bold uppercase tracking-wider">Flow</span>
+      <h2 class="text-2xl md:text-3xl font-bold mt-2 mb-4">ご利用の流れ</h2>
+      <p class="text-muted max-w-2xl mx-auto">お問い合わせから最短2週間で営業活動を開始できます</p>
+    </div>
+
+    <div class="max-w-4xl mx-auto">
+      <div class="space-y-0">
+        {[
+          { step: '01', title: '無料相談', desc: 'まずはお気軽にお問い合わせください。御社の課題やターゲット市場についてヒアリングします。', icon: '&#128172;' },
+          { step: '02', title: 'ヒアリング・市場調査', desc: '御社の製品・サービスに最適なターゲット国・業種を分析。営業戦略をご提案します。', icon: '&#128269;' },
+          { step: '03', title: 'プラン策定・ご契約', desc: '最適なプランを選定し、営業リスト・トークスクリプト・KPIを策定します。', icon: '&#128221;' },
+          { step: '04', title: '営業活動開始', desc: 'ASEAN専門チームが御社に代わって営業活動を開始。電話・メール・SNSでアプローチします。', icon: '&#128640;' },
+          { step: '05', title: '月次レポート', desc: '毎月の営業活動レポートを提出。商談件数・進捗・改善提案を共有し、PDCAを回します。', icon: '&#128202;' },
+        ].map((item, i) => (
+          <div class="flex gap-6 items-start relative">
+            {/* Connecting line */}
+            {i < 4 && (
+              <div class="absolute left-6 top-14 w-0.5 h-full bg-border -z-10"></div>
+            )}
+            <div class="w-12 h-12 bg-primary text-white rounded-full flex items-center justify-center font-bold text-sm shrink-0">
+              {item.step}
+            </div>
+            <div class="pb-10">
+              <h3 class="font-bold text-lg mb-1">{item.title}</h3>
+              <p class="text-muted text-sm leading-relaxed">{item.desc}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>

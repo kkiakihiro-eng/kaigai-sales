@@ -1,0 +1,55 @@
+---
+// FAQ section with JSON-LD FAQPage schema (LLMO critical)
+const faqItems = [
+  { q: '最低契約期間はありますか？', a: 'はい、最低3ヶ月からのご契約となります。海外営業は成果が出るまでに一定の期間が必要なため、3ヶ月を目安にPDCAを回していきます。' },
+  { q: 'どの国に対応していますか？', a: 'タイ、ベトナム、フィリピン、インドネシア、マレーシアの5カ国に対応しています。その他の国についてもご相談ください。' },
+  { q: '英語が話せなくても大丈夫ですか？', a: 'はい、全く問題ありません。弊社のバイリンガルスタッフが御社と海外企業の間に入り、コミュニケーションを代行します。商談時には通訳サポートも可能です。' },
+  { q: '商談保証制度とは何ですか？', a: 'Standard・Premiumプランに含まれる制度です。月間の保証商談件数に達しない場合、追加の営業活動を無償で実施します。' },
+  { q: '補助金はどのようなものが使えますか？', a: '海外展開に関する各種補助金（新規輸出1万者支援プログラム、小規模事業者持続化補助金など）の活用をサポートしています。最大2/3が補助される場合があります。詳しくはお問い合わせください。' },
+  { q: '月額費用以外にかかる費用はありますか？', a: '基本的に月額費用のみです。ただし、出張が必要な商談の渡航費や、特別な資料翻訳が必要な場合は別途お見積もりとなります。' },
+  { q: 'どのような業種に対応していますか？', a: '製造業・食品製造業を中心に、IT、HR、マーケティングなど幅広い業種に対応しています。ASEAN向け輸出ポテンシャルのある企業であれば、業種を問わずご相談ください。' },
+  { q: '営業活動の進捗はどうやって確認できますか？', a: 'Standard以上のプランでは専用ダッシュボードで、リアルタイムに営業活動の進捗を確認いただけます。また、全プランで月次レポートを提出します。' },
+  { q: '途中でプラン変更はできますか？', a: 'はい、月単位でプランの変更が可能です。営業活動の成果に応じて、プランのアップグレード・ダウングレードをご検討いただけます。' },
+  { q: '自社の営業チームと連携できますか？', a: 'もちろんです。御社の営業チームとの連携を前提にサービスを設計しています。商談設定後のクロージングは御社で行っていただく形も可能です。' },
+];
+
+// JSON-LD FAQPage schema for LLMO
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faqItems.map(item => ({
+    "@type": "Question",
+    "name": item.q,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": item.a
+    }
+  }))
+};
+---
+
+<section id="faq" class="bg-bg-alt reveal">
+  <div class="max-w-3xl mx-auto px-4">
+    <div class="text-center mb-12">
+      <span class="text-sm text-primary font-bold uppercase tracking-wider">FAQ</span>
+      <h2 class="text-2xl md:text-3xl font-bold mt-2 mb-4">よくある質問</h2>
+    </div>
+
+    <div class="space-y-4">
+      {faqItems.map(item => (
+        <details class="bg-white border border-border rounded-lg group">
+          <summary class="font-bold p-5 cursor-pointer flex items-center justify-between hover:bg-bg-alt transition-colors rounded-lg">
+            <span>Q. {item.q}</span>
+            <span class="text-muted group-open:rotate-180 transition-transform ml-4 shrink-0">&#9660;</span>
+          </summary>
+          <div class="px-5 pb-5">
+            <p class="text-muted leading-relaxed">{item.a}</p>
+          </div>
+        </details>
+      ))}
+    </div>
+  </div>
+
+  <!-- FAQ JSON-LD for LLMO -->
+  <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+</section>

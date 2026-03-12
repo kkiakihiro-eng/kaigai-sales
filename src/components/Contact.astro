@@ -1,0 +1,119 @@
+---
+// Contact form + Company info section (Web3Forms)
+---
+
+<section id="contact" class="reveal">
+  <div class="max-w-6xl mx-auto px-4">
+    <div class="text-center mb-12">
+      <span class="text-sm text-primary font-bold uppercase tracking-wider">Contact</span>
+      <h2 class="text-2xl md:text-3xl font-bold mt-2 mb-4">無料でご相談ください</h2>
+      <p class="text-muted max-w-2xl mx-auto">海外営業に関するお悩みをお気軽にご相談ください。担当者が1営業日以内にご連絡いたします。</p>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-12 max-w-5xl mx-auto">
+      <!-- Form -->
+      <div>
+        <form action="https://api.web3forms.com/submit" method="POST" class="space-y-5">
+          <input type="hidden" name="access_key" value="YOUR_WEB3FORMS_KEY" />
+          <input type="hidden" name="subject" value="【海外セールスくん】お問い合わせ" />
+          <input type="hidden" name="from_name" value="海外セールスくん" />
+          <input type="checkbox" name="botcheck" class="hidden" />
+
+          <div>
+            <label class="block text-sm font-medium mb-1">お問い合わせ種別</label>
+            <select name="inquiry_type" required class="w-full border border-border rounded-lg px-4 py-3 text-sm focus:ring-2 focus:ring-primary focus:border-primary outline-none">
+              <option value="">選択してください</option>
+              <option value="consultation">無料相談</option>
+              <option value="document">資料請求</option>
+              <option value="estimate">見積もり依頼</option>
+              <option value="other">その他</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium mb-1">会社名 <span class="text-primary">*</span></label>
+            <input type="text" name="company" required placeholder="例: 株式会社サンプル" class="w-full border border-border rounded-lg px-4 py-3 text-sm focus:ring-2 focus:ring-primary focus:border-primary outline-none" />
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium mb-1">お名前 <span class="text-primary">*</span></label>
+            <input type="text" name="name" required placeholder="例: 山田 太郎" class="w-full border border-border rounded-lg px-4 py-3 text-sm focus:ring-2 focus:ring-primary focus:border-primary outline-none" />
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium mb-1">メールアドレス <span class="text-primary">*</span></label>
+            <input type="email" name="email" required placeholder="example@company.co.jp" class="w-full border border-border rounded-lg px-4 py-3 text-sm focus:ring-2 focus:ring-primary focus:border-primary outline-none" />
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium mb-1">電話番号</label>
+            <input type="tel" name="phone" placeholder="090-XXXX-XXXX" class="w-full border border-border rounded-lg px-4 py-3 text-sm focus:ring-2 focus:ring-primary focus:border-primary outline-none" />
+          </div>
+
+          <div>
+            <label class="block text-sm font-medium mb-1">ご相談内容</label>
+            <textarea name="message" rows="4" placeholder="海外営業に関するご相談内容をお書きください" class="w-full border border-border rounded-lg px-4 py-3 text-sm focus:ring-2 focus:ring-primary focus:border-primary outline-none resize-vertical"></textarea>
+          </div>
+
+          <button type="submit" class="w-full bg-primary hover:bg-primary-dark text-white font-bold py-4 rounded-lg transition-colors text-lg shadow-lg shadow-primary/20">
+            送信する
+          </button>
+
+          <p class="text-xs text-muted text-center">
+            送信いただいた情報は<a href="/privacy" class="underline">プライバシーポリシー</a>に基づき適切に管理します。
+          </p>
+        </form>
+      </div>
+
+      <!-- Company info -->
+      <div>
+        <div class="bg-bg-alt rounded-xl p-8 mb-6">
+          <h3 class="font-bold text-lg mb-4">運営会社</h3>
+          <table class="w-full text-sm">
+            <tbody>
+              <tr class="border-b border-border">
+                <td class="py-3 text-muted w-28">会社名</td>
+                <td class="py-3">株式会社Albaly<br /><span class="text-muted text-xs">Albaly Group Co., Ltd.</span></td>
+              </tr>
+              <tr class="border-b border-border">
+                <td class="py-3 text-muted">代表者</td>
+                <td class="py-3">木本 彰宏</td>
+              </tr>
+              <tr class="border-b border-border">
+                <td class="py-3 text-muted">設立</td>
+                <td class="py-3">2021年（タイ法人）<br />2024年（日本法人）</td>
+              </tr>
+              <tr class="border-b border-border">
+                <td class="py-3 text-muted">拠点</td>
+                <td class="py-3">
+                  タイ（バンコク）<br />
+                  日本（福岡県）
+                </td>
+              </tr>
+              <tr class="border-b border-border">
+                <td class="py-3 text-muted">従業員数</td>
+                <td class="py-3">約30名</td>
+              </tr>
+              <tr>
+                <td class="py-3 text-muted">メール</td>
+                <td class="py-3">
+                  <a href="mailto:corporate_sales@albaly.jp" class="text-primary underline">
+                    corporate_sales@albaly.jp
+                  </a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="bg-primary-light rounded-xl p-6 text-center">
+          <p class="text-sm text-muted mb-2">お急ぎの方はこちら</p>
+          <a href="tel:0661318773" class="text-2xl font-bold text-primary">
+            066-131-8773
+          </a>
+          <p class="text-xs text-muted mt-1">平日 9:00〜18:00（タイ時間）</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

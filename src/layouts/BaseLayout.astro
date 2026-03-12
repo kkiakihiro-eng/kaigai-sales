@@ -1,0 +1,136 @@
+---
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+interface Props {
+  title?: string;
+  description?: string;
+  schema?: Record<string, any> | Record<string, any>[];
+}
+
+const { title, description, schema } = Astro.props;
+
+const siteName = '海外セールスくん';
+const defaultDescription = '御社の"海外営業部"を、月額制でまるごと提供。ASEAN専門チーム30名が、リスト作成からアポ獲得まで代行。補助金活用で実質月5万円〜。';
+const pageTitle = title ? `${title} | ${siteName}` : `${siteName} | 海外営業代行サービス by Albaly Group`;
+const pageDescription = description || defaultDescription;
+
+const siteUrl = 'https://kaigai-sales.albaly.jp';
+const ogImageUrl = `${siteUrl}/og-image.png`;
+
+const ga4Id = import.meta.env.PUBLIC_GA4_ID;
+const googleSiteVerification = import.meta.env.PUBLIC_GOOGLE_SITE_VERIFICATION;
+---
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{pageTitle}</title>
+  <meta name="description" content={pageDescription} />
+
+  {googleSiteVerification && (
+    <meta name="google-site-verification" content={googleSiteVerification} />
+  )}
+
+  <!-- OGP -->
+  <meta property="og:title" content={pageTitle} />
+  <meta property="og:description" content={pageDescription} />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="ja_JP" />
+  <meta property="og:url" content={`${siteUrl}${Astro.url.pathname}`} />
+  <meta property="og:image" content={ogImageUrl} />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:site_name" content={siteName} />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:image" content={ogImageUrl} />
+  <meta name="twitter:title" content={pageTitle} />
+  <meta name="twitter:description" content={pageDescription} />
+
+  <link rel="canonical" href={`${siteUrl}${Astro.url.pathname}`} />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet" />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+  <!-- GA4 -->
+  {ga4Id && (
+    <>
+      <script async src={`https://www.googletagmanager.com/gtag/js?id=${ga4Id}`}></script>
+      <script is:inline define:vars={{ ga4Id }}>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', ga4Id);
+      </script>
+    </>
+  )}
+
+  <!-- JSON-LD: Organization + Service -->
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Albaly Group Co., Ltd.",
+    "url": "https://albaly.jp",
+    "logo": `${siteUrl}/images/logo.svg`,
+    "description": "ASEAN専門のセールスBPOサービスを提供するAlbaly Group",
+    "address": [
+      {
+        "@type": "PostalAddress",
+        "addressLocality": "Bangkok",
+        "addressCountry": "TH"
+      },
+      {
+        "@type": "PostalAddress",
+        "addressLocality": "Fukuoka",
+        "addressCountry": "JP"
+      }
+    ]
+  })} />
+
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": "海外セールスくん",
+    "description": defaultDescription,
+    "provider": {
+      "@type": "Organization",
+      "name": "Albaly Group Co., Ltd."
+    },
+    "areaServed": ["TH", "VN", "PH", "ID", "MY"],
+    "serviceType": "Sales BPO"
+  })} />
+
+  {schema && (
+    <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+  )}
+</head>
+<body class="bg-bg text-secondary antialiased">
+  <Header />
+  <main>
+    <slot />
+  </main>
+  <Footer />
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+  </script>
+</body>
+</html>
