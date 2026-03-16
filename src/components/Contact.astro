@@ -50,6 +50,39 @@
         </div>
 
         <div>
+          <label class="block text-sm font-medium mb-1">従業員数</label>
+          <select name="employee_count" class="w-full border border-border rounded-lg px-4 py-3 text-sm focus:ring-2 focus:ring-primary focus:border-primary outline-none">
+            <option value="">選択してください</option>
+            <option value="1-10">1〜10名</option>
+            <option value="11-50">11〜50名</option>
+            <option value="51-200">51〜200名</option>
+            <option value="201+">201名以上</option>
+          </select>
+        </div>
+
+        <div>
+          <label class="block text-sm font-medium mb-1">ご興味のあるプラン</label>
+          <select name="plan_interest" class="w-full border border-border rounded-lg px-4 py-3 text-sm focus:ring-2 focus:ring-primary focus:border-primary outline-none">
+            <option value="">選択してください</option>
+            <option value="lite">Lite（月額10万円）</option>
+            <option value="standard">Standard（月額15万円）</option>
+            <option value="premium">Premium（月額25万円）</option>
+            <option value="undecided">まだわからない</option>
+          </select>
+        </div>
+
+        <div>
+          <label class="block text-sm font-medium mb-1">ご検討時期</label>
+          <select name="timeline" class="w-full border border-border rounded-lg px-4 py-3 text-sm focus:ring-2 focus:ring-primary focus:border-primary outline-none">
+            <option value="">選択してください</option>
+            <option value="asap">すぐにでも始めたい</option>
+            <option value="3months">3ヶ月以内</option>
+            <option value="6months">半年以内</option>
+            <option value="research">情報収集中</option>
+          </select>
+        </div>
+
+        <div>
           <label class="block text-sm font-medium mb-1">ご相談内容</label>
           <textarea name="message" rows="4" placeholder="海外営業に関するご相談内容をお書きください" class="w-full border border-border rounded-lg px-4 py-3 text-sm focus:ring-2 focus:ring-primary focus:border-primary outline-none resize-vertical"></textarea>
         </div>
