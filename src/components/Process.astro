@@ -1,0 +1,75 @@
+---
+// Process - 4-step onboarding flow
+const steps = [
+  {
+    number: 1,
+    title: '無料相談',
+    description: 'ヒアリングで御社の商材・ターゲット市場・目標を把握します。',
+    duration: '約1時間',
+    icon: 'M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z',
+  },
+  {
+    number: 2,
+    title: '戦略策定',
+    description: 'ターゲット国・業界・アプローチ方法を設計。営業リストも作成します。',
+    duration: '1〜2週間',
+    icon: 'M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01',
+  },
+  {
+    number: 3,
+    title: '営業開始',
+    description: 'リストをもとに現地語でアプローチ開始。商談をセッティングします。',
+    duration: '契約後すぐ',
+    icon: 'M13 10V3L4 14h7v7l9-11h-7z',
+  },
+  {
+    number: 4,
+    title: '成果報告',
+    description: '月次レポートで進捗を共有。改善提案も継続的に実施します。',
+    duration: '毎月',
+    icon: 'M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z',
+  },
+];
+---
+
+<section class="bg-bg-alt reveal">
+  <div class="max-w-6xl mx-auto px-4">
+    <div class="text-center mb-12">
+      <span class="text-sm text-primary font-bold uppercase tracking-wider">Process</span>
+      <h2 class="text-2xl md:text-3xl font-bold mt-2 mb-4">導入はかんたん4ステップ</h2>
+      <p class="text-muted max-w-2xl mx-auto">
+        お問い合わせから最短2週間で営業活動を開始できます。
+      </p>
+    </div>
+
+    <div class="grid md:grid-cols-4 gap-6">
+      {steps.map((step, index) => (
+        <div class="relative text-center">
+          {/* Arrow connector (hidden on mobile, shown between cards on desktop) */}
+          {index < steps.length - 1 && (
+            <div class="hidden md:block absolute top-10 -right-3 z-10">
+              <svg class="w-6 h-6 text-primary/40" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+              </svg>
+            </div>
+          )}
+
+          <div class="bg-white border border-border rounded-2xl p-6 h-full">
+            <div class="w-14 h-14 bg-primary text-white rounded-2xl flex items-center justify-center mx-auto mb-4">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={step.icon} />
+              </svg>
+            </div>
+
+            <div class="text-xs text-primary font-bold mb-1">Step {step.number}</div>
+            <h3 class="font-bold text-lg mb-2">{step.title}</h3>
+            <p class="text-muted text-sm leading-relaxed mb-3">{step.description}</p>
+            <span class="text-xs text-primary bg-primary-light px-3 py-1 rounded-full font-medium">
+              {step.duration}
+            </span>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

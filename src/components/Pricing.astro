@@ -1,0 +1,111 @@
+---
+// Pricing section - 3 plans comparison
+const plans = [
+  {
+    name: 'Lite',
+    price: '10',
+    priceNote: '万円/月（税別）',
+    recommended: false,
+    target: 'まず試したい企業向け',
+    features: [
+      { label: '稼働時間', value: '月30時間' },
+      { label: '対象国', value: '1カ国' },
+      { label: 'リスト作成', value: '月50社' },
+      { label: 'テレセールス', value: '月50〜100件' },
+      { label: '商談目安', value: '月2件（目安）' },
+      { label: '月次レポート', value: '標準' },
+      { label: 'ダッシュボード', value: '—' },
+      { label: '商談保証', value: '—' },
+      { label: '専任担当', value: '—' },
+    ],
+    subsidyPrice: '実質 約3.3万円〜',
+  },
+  {
+    name: 'Standard',
+    price: '15',
+    priceNote: '万円/月（税別）',
+    recommended: true,
+    target: '本格的に海外営業を始める企業向け',
+    features: [
+      { label: '稼働時間', value: '月60時間' },
+      { label: '対象国', value: '最大2カ国' },
+      { label: 'リスト作成', value: '月150社' },
+      { label: 'テレセールス', value: '月150〜250件' },
+      { label: '商談保証', value: '月4件（保証）' },
+      { label: '月次レポート', value: '詳細' },
+      { label: 'ダッシュボード', value: '○' },
+      { label: 'メール営業', value: '○' },
+      { label: '専任担当', value: '○（1名）' },
+    ],
+    subsidyPrice: '実質 約5万円〜',
+  },
+  {
+    name: 'Premium',
+    price: '25',
+    priceNote: '万円/月（税別）',
+    recommended: false,
+    target: '複数国を同時に攻略したい企業向け',
+    features: [
+      { label: '稼働時間', value: '月100時間' },
+      { label: '対象国', value: '最大5カ国' },
+      { label: 'リスト作成', value: '月300社' },
+      { label: 'テレセールス', value: '月300〜500件' },
+      { label: '商談保証', value: '月7件（保証）' },
+      { label: '月次レポート', value: '詳細＋戦略提言' },
+      { label: 'ダッシュボード', value: '○（リアルタイム）' },
+      { label: 'メール営業', value: '○（カスタマイズ）' },
+      { label: '専任担当', value: '○（シニア）' },
+    ],
+    subsidyPrice: '実質 約8.3万円〜',
+  },
+];
+---
+
+<section id="pricing" class="reveal">
+  <div class="max-w-6xl mx-auto px-4">
+    <div class="text-center mb-12">
+      <span class="text-sm text-primary font-bold uppercase tracking-wider">Pricing</span>
+      <h2 class="text-2xl md:text-3xl font-bold mt-2 mb-4">シンプルな料金体系</h2>
+      <p class="text-muted max-w-2xl mx-auto">全プラン3ヶ月〜の契約。補助金を活用すれば、実質負担を大幅に軽減できます。</p>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+      {plans.map((plan) => (
+        <div class={`relative rounded-2xl border-2 p-6 ${plan.recommended ? 'border-primary bg-primary-light shadow-xl scale-105' : 'border-border bg-white'}`}>
+          {plan.recommended && (
+            <div class="absolute -top-4 left-1/2 -translate-x-1/2">
+              <span class="bg-primary text-white text-xs font-bold px-4 py-1.5 rounded-full">おすすめ</span>
+            </div>
+          )}
+
+          <div class="text-center mb-6">
+            <h3 class="text-lg font-bold mb-1">{plan.name}</h3>
+            <p class="text-xs text-muted mb-4">{plan.target}</p>
+            <div class="flex items-baseline justify-center gap-1">
+              <span class="text-4xl font-bold text-primary">{plan.price}</span>
+              <span class="text-sm text-muted">{plan.priceNote}</span>
+            </div>
+            <p class="text-xs text-primary font-bold mt-2 bg-primary/10 rounded-full py-1 px-3 inline-block">
+              補助金適用後 {plan.subsidyPrice}
+            </p>
+          </div>
+
+          <ul class="space-y-3 mb-6">
+            {plan.features.map((f) => (
+              <li class="flex justify-between text-sm border-b border-border/50 pb-2">
+                <span class="text-muted">{f.label}</span>
+                <span class={`font-medium ${f.value === '—' ? 'text-muted' : ''}`}>{f.value}</span>
+              </li>
+            ))}
+          </ul>
+
+          <a href="#contact" class={`block text-center py-3 rounded-lg font-bold transition-colors ${plan.recommended ? 'bg-primary text-white hover:bg-primary-dark shadow-lg shadow-primary/20' : 'bg-secondary/5 text-secondary hover:bg-secondary/10'}`}>
+            問い合わせる
+          </a>
+        </div>
+      ))}
+    </div>
+
+    <p class="text-xs text-muted text-center mt-8">※ 補助金の適用額は企業規模・申請内容により異なります。詳しくはお問い合わせください。</p>
+  </div>
+</section>

@@ -1,0 +1,58 @@
+---
+// PainPoints - Challenge empathy section
+const painPoints = [
+  {
+    icon: '🌏',
+    text: '海外に売りたいが、何から始めればいいかわからない',
+  },
+  {
+    icon: '🗣️',
+    text: '英語対応できる営業人材がいない',
+  },
+  {
+    icon: '📋',
+    text: '展示会に出たが、その後のフォローができていない',
+  },
+  {
+    icon: '🏢',
+    text: '海外拠点を作るのはコストが高すぎる',
+  },
+  {
+    icon: '📝',
+    text: '補助金があると聞いたが、申請が面倒そう',
+  },
+];
+---
+
+<section class="bg-bg-alt reveal">
+  <div class="max-w-6xl mx-auto px-4">
+    <div class="text-center mb-12">
+      <span class="text-sm text-primary font-bold uppercase tracking-wider">Challenges</span>
+      <h2 class="text-2xl md:text-3xl font-bold mt-2 mb-4">こんなお悩みはありませんか？</h2>
+      <p class="text-muted max-w-2xl mx-auto">
+        福岡の中小企業の経営者様から、よくいただくご相談です。
+      </p>
+    </div>
+
+    <div class="max-w-3xl mx-auto space-y-4">
+      {painPoints.map((item) => (
+        <div class="flex items-start gap-4 bg-white p-5 rounded-xl border border-border shadow-sm hover:shadow-md transition-shadow">
+          <span class="text-2xl flex-shrink-0 mt-0.5">{item.icon}</span>
+          <div class="flex items-center gap-3">
+            <svg class="w-5 h-5 text-primary flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4" />
+            </svg>
+            <p class="text-base md:text-lg font-medium">{item.text}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <div class="text-center mt-10">
+      <p class="text-lg font-bold text-secondary mb-2">
+        その悩み、<span class="text-primary">海外セールスくん</span>がすべて解決します。
+      </p>
+      <div class="w-12 h-1 bg-primary mx-auto rounded-full"></div>
+    </div>
+  </div>
+</section>

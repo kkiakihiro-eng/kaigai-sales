@@ -1,0 +1,201 @@
+---
+// Subsidy Simulator - Interactive client-side calculator
+---
+
+<section id="simulator" class="reveal bg-gradient-to-b from-primary-light to-white">
+  <div class="max-w-3xl mx-auto px-4">
+    <div class="text-center mb-10">
+      <span class="text-sm text-primary font-bold uppercase tracking-wider">Simulator</span>
+      <h2 class="text-2xl md:text-3xl font-bold mt-2 mb-4">補助金シミュレーター</h2>
+      <p class="text-muted">30秒で御社の実質負担額を診断します</p>
+    </div>
+
+    <div class="bg-white rounded-2xl border border-border shadow-lg p-6 md:p-8">
+      <form id="subsidy-form" class="space-y-6">
+        <!-- Step 1 -->
+        <div>
+          <label class="block text-sm font-bold mb-2">従業員数</label>
+          <select id="sim-employees" class="w-full border border-border rounded-lg px-4 py-3 text-sm focus:ring-2 focus:ring-primary focus:border-primary outline-none">
+            <option value="">選択してください</option>
+            <option value="micro">1〜5名</option>
+            <option value="small">6〜20名</option>
+            <option value="medium">21〜50名</option>
+            <option value="large">51〜100名</option>
+            <option value="xlarge">101名以上</option>
+          </select>
+        </div>
+
+        <!-- Step 2 -->
+        <div>
+          <label class="block text-sm font-bold mb-2">業種</label>
+          <select id="sim-industry" class="w-full border border-border rounded-lg px-4 py-3 text-sm focus:ring-2 focus:ring-primary focus:border-primary outline-none">
+            <option value="">選択してください</option>
+            <option value="manufacturing">製造業</option>
+            <option value="food">食品製造・加工</option>
+            <option value="it">IT・ソフトウェア</option>
+            <option value="trading">貿易・商社</option>
+            <option value="service">サービス業</option>
+            <option value="other">その他</option>
+          </select>
+        </div>
+
+        <!-- Step 3 -->
+        <div>
+          <label class="block text-sm font-bold mb-2">関心のあるプラン</label>
+          <div class="grid grid-cols-3 gap-3">
+            <label class="relative cursor-pointer">
+              <input type="radio" name="plan" value="lite" class="peer sr-only" />
+              <div class="text-center p-4 border-2 border-border rounded-xl peer-checked:border-primary peer-checked:bg-primary-light transition-all">
+                <p class="font-bold text-sm">Lite</p>
+                <p class="text-primary font-bold text-lg mt-1">10万円</p>
+                <p class="text-xs text-muted">/月</p>
+              </div>
+            </label>
+            <label class="relative cursor-pointer">
+              <input type="radio" name="plan" value="standard" class="peer sr-only" checked />
+              <div class="text-center p-4 border-2 border-border rounded-xl peer-checked:border-primary peer-checked:bg-primary-light transition-all">
+                <p class="font-bold text-sm">Standard</p>
+                <p class="text-primary font-bold text-lg mt-1">15万円</p>
+                <p class="text-xs text-muted">/月</p>
+              </div>
+            </label>
+            <label class="relative cursor-pointer">
+              <input type="radio" name="plan" value="premium" class="peer sr-only" />
+              <div class="text-center p-4 border-2 border-border rounded-xl peer-checked:border-primary peer-checked:bg-primary-light transition-all">
+                <p class="font-bold text-sm">Premium</p>
+                <p class="text-primary font-bold text-lg mt-1">25万円</p>
+                <p class="text-xs text-muted">/月</p>
+              </div>
+            </label>
+          </div>
+        </div>
+
+        <button type="button" id="sim-button" class="w-full bg-primary hover:bg-primary-dark text-white font-bold py-4 rounded-lg transition-colors text-lg shadow-lg shadow-primary/20">
+          診断する
+        </button>
+      </form>
+
+      <!-- Result (hidden by default) -->
+      <div id="sim-result" class="hidden mt-8 pt-8 border-t border-border">
+        <h3 class="font-bold text-lg mb-6 text-center">診断結果</h3>
+
+        <div class="grid md:grid-cols-2 gap-4 mb-6">
+          <div class="bg-white rounded-xl border border-border p-5 text-center">
+            <p class="text-sm text-muted mb-1">月額料金</p>
+            <p class="text-2xl font-bold" id="result-price">—</p>
+          </div>
+          <div class="bg-primary-light rounded-xl border-2 border-primary p-5 text-center">
+            <p class="text-sm text-primary font-bold mb-1">補助金適用後（実質）</p>
+            <p class="text-2xl font-bold text-primary" id="result-subsidy-price">—</p>
+          </div>
+        </div>
+
+        <div id="result-subsidies" class="space-y-3 mb-6"></div>
+
+        <div class="text-center">
+          <p class="text-xs text-muted mb-4">※ 上記は一般的な条件に基づく概算です。実際の補助額は審査により異なります。</p>
+          <a href="#contact" class="inline-flex items-center justify-center bg-primary hover:bg-primary-dark text-white font-bold py-3 px-8 rounded-lg transition-colors shadow-lg shadow-primary/20">
+            詳しく相談する
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  const subsidyData = {
+    jizokuka: {
+      name: '小規模事業者持続化補助金',
+      rate: 2/3,
+      max: 500000,
+      conditions: ['micro', 'small'],
+      description: '従業員20名以下の事業者向け。海外営業代行費を「販路開拓費」として申請可能。',
+    },
+    it: {
+      name: 'IT導入補助金',
+      rate: 1/2,
+      max: 500000,
+      conditions: ['micro', 'small', 'medium', 'large'],
+      description: 'DX関連の導入費用が対象。ダッシュボード・CRM等のツール費用に適用可能。',
+    },
+    monozukuri: {
+      name: 'ものづくり補助金（グローバル展開型）',
+      rate: 1/2,
+      max: 1000000,
+      conditions: ['small', 'medium', 'large'],
+      industries: ['manufacturing', 'food'],
+      description: '製造業の海外展開が主目的の場合に活用可能。上限額が大きい。',
+    },
+    fukuoka: {
+      name: '福岡県海外展開促進補助金',
+      rate: 2/3,
+      max: 1000000,
+      conditions: ['micro', 'small', 'medium'],
+      description: '福岡県内中小企業の海外販路開拓を支援。補助率2/3、上限100万円。',
+    },
+  };
+
+  const planPrices: Record<string, number> = { lite: 100000, standard: 150000, premium: 250000 };
+
+  document.getElementById('sim-button')?.addEventListener('click', () => {
+    const employees = (document.getElementById('sim-employees') as HTMLSelectElement).value;
+    const industry = (document.getElementById('sim-industry') as HTMLSelectElement).value;
+    const plan = (document.querySelector('input[name="plan"]:checked') as HTMLInputElement)?.value || 'standard';
+
+    if (!employees || !industry) {
+      alert('従業員数と業種を選択してください');
+      return;
+    }
+
+    const monthlyPrice = planPrices[plan];
+    const annualPrice = monthlyPrice * 12;
+
+    // Find applicable subsidies
+    const applicable: { name: string; rate: number; max: number; description: string; saving: number }[] = [];
+
+    for (const [, sub] of Object.entries(subsidyData)) {
+      if (!sub.conditions.includes(employees)) continue;
+      if ('industries' in sub && !(sub.industries as string[]).includes(industry)) continue;
+
+      const saving = Math.min(annualPrice * sub.rate, sub.max);
+      applicable.push({ ...sub, saving });
+    }
+
+    // Best subsidy
+    const bestSubsidy = applicable.sort((a, b) => b.saving - a.saving)[0];
+    const monthlySaving = bestSubsidy ? Math.floor(bestSubsidy.saving / 12) : 0;
+    const effectiveMonthly = monthlyPrice - monthlySaving;
+
+    // Display results
+    document.getElementById('result-price')!.textContent = `${(monthlyPrice / 10000).toFixed(0)}万円/月`;
+    document.getElementById('result-subsidy-price')!.textContent = `約${(effectiveMonthly / 10000).toFixed(1)}万円/月`;
+
+    const subsidyContainer = document.getElementById('result-subsidies')!;
+    subsidyContainer.innerHTML = applicable.length > 0
+      ? '<h4 class="font-bold text-sm mb-3">適用可能な補助金</h4>' +
+        applicable.map(s =>
+          `<div class="bg-white rounded-lg border border-border p-4">
+            <div class="flex justify-between items-start mb-1">
+              <h5 class="font-bold text-sm">${s.name}</h5>
+              <span class="text-primary font-bold text-sm shrink-0 ml-2">最大${(s.max / 10000).toFixed(0)}万円</span>
+            </div>
+            <p class="text-xs text-muted">${s.description}</p>
+            <span class="inline-block mt-2 bg-primary-light text-primary text-xs font-bold px-3 py-1 rounded-full">補助率 ${Math.round(s.rate * 100)}%</span>
+          </div>`
+        ).join('')
+      : '<p class="text-sm text-muted text-center">条件に合う補助金が見つかりませんでした。詳しくはお問い合わせください。</p>';
+
+    document.getElementById('sim-result')!.classList.remove('hidden');
+
+    // GA4 tracking
+    if (typeof gtag === 'function') {
+      gtag('event', 'simulator_complete', {
+        event_category: 'engagement',
+        plan: plan,
+        employees: employees,
+        industry: industry,
+      });
+    }
+  });
+</script>

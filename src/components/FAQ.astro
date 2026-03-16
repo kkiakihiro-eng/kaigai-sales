@@ -1,0 +1,63 @@
+---
+// FAQ section - Accordion style
+const faqs = [
+  {
+    q: '英語ができなくても大丈夫ですか？',
+    a: 'はい、すべて日本語でやり取り可能です。現地語（タイ語・英語等）でのアプローチは、バンコクのASEAN専門チームが対応します。レポートもダッシュボードもすべて日本語です。',
+  },
+  {
+    q: '本当に成果は出ますか？',
+    a: '海外営業は国内と異なり、関係構築に3〜6ヶ月かかります。最初の3ヶ月はリスト構築・アプローチのフェーズで、商談パイプラインが安定するのは4〜6ヶ月目以降が目安です。Standard以上のプランでは商談保証制度があり、未達の場合は翌月に追加対応します。',
+  },
+  {
+    q: 'タイのチームで大丈夫ですか？',
+    a: 'バンコクのチームはASEAN市場に精通した30名のプロフェッショナルです。日本法人（Albaly JP）が品質管理・日本語対応を担当し、現地チームがアプローチ・商談設定を行うダブルチーム体制を取っています。',
+  },
+  {
+    q: '他の営業代行との違いは何ですか？',
+    a: '3つあります。①現地バンコクに30人の常駐チームがいること（日本からのリモート管理ではない）、②ASEAN6カ国を1サービスでカバーできること、③補助金の申請サポートまで込みであること。月10万円からこの体制を持てるのは業界でもほぼありません。',
+  },
+  {
+    q: 'いつから始められますか？',
+    a: 'ご契約から最短2週間でアプローチを開始できます。キックオフMTGでターゲット国・業種を確認し、1週間でリスト作成、翌週からアプローチ開始が標準スケジュールです。',
+  },
+  {
+    q: '最低契約期間はありますか？途中で辞められますか？',
+    a: '最低契約期間は3ヶ月です。海外営業は成果が出るまでに時間がかかるため、短期では効果を測定できません。3ヶ月経過後は、30日前の通知で解約可能です。違約金はかかりません。',
+  },
+  {
+    q: '補助金は本当に使えますか？',
+    a: '使えます。小規模事業者持続化補助金（補助率2/3、上限50〜250万円）やIT導入補助金など、複数の補助金が対象になります。弊社では申請書の作成サポートから商工会議所への同行まで対応しています。まずは御社が対象になるかどうか、無料でチェックいたします。',
+  },
+  {
+    q: '食品業界でも対応できますか？',
+    a: 'はい、食品メーカーの海外展開実績があります。Halal認証対応、ASEAN各国のFDA・食品規制への対応もサポートしています。福岡は明太子・八女茶・日本酒など、ASEAN市場で高い需要がある食品が多い地域です。',
+  },
+];
+---
+
+<section id="faq" class="reveal">
+  <div class="max-w-3xl mx-auto px-4">
+    <div class="text-center mb-12">
+      <span class="text-sm text-primary font-bold uppercase tracking-wider">FAQ</span>
+      <h2 class="text-2xl md:text-3xl font-bold mt-2 mb-4">よくある質問</h2>
+    </div>
+
+    <div class="space-y-3">
+      {faqs.map((faq, i) => (
+        <details class="group bg-white border border-border rounded-xl overflow-hidden">
+          <summary class="flex items-center justify-between cursor-pointer p-5 font-medium text-sm md:text-base hover:bg-gray-50 transition-colors">
+            <span class="flex items-center gap-3">
+              <span class="text-primary font-bold text-xs">Q{i + 1}</span>
+              {faq.q}
+            </span>
+            <span class="text-muted group-open:rotate-180 transition-transform text-lg shrink-0 ml-4">▼</span>
+          </summary>
+          <div class="px-5 pb-5 text-sm text-muted leading-relaxed border-t border-border/50 pt-4">
+            {faq.a}
+          </div>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>

@@ -1,0 +1,38 @@
+---
+// StickyMobileCTA - Fixed bottom CTA for mobile devices
+---
+
+<div id="sticky-cta" class="fixed bottom-0 left-0 right-0 z-50 md:hidden translate-y-full transition-transform duration-300 bg-white border-t border-border shadow-2xl px-4 py-3 safe-area-bottom">
+  <a href="#contact" class="flex items-center justify-center bg-primary hover:bg-primary-dark text-white font-bold py-3 rounded-lg transition-colors text-sm w-full">
+    無料で相談する
+  </a>
+</div>
+
+<style>
+  .safe-area-bottom {
+    padding-bottom: max(0.75rem, env(safe-area-inset-bottom));
+  }
+</style>
+
+<script>
+  const stickyCta = document.getElementById('sticky-cta');
+  const heroSection = document.querySelector('section');
+  const contactSection = document.getElementById('contact');
+
+  if (stickyCta && heroSection) {
+    const observer = new IntersectionObserver((entries) => {
+      // Show CTA when hero is out of view
+      const heroVisible = entries.find(e => e.target === heroSection)?.isIntersecting;
+      const contactVisible = entries.find(e => e.target === contactSection)?.isIntersecting;
+
+      if (heroVisible || contactVisible) {
+        stickyCta.classList.add('translate-y-full');
+      } else {
+        stickyCta.classList.remove('translate-y-full');
+      }
+    }, { threshold: 0.1 });
+
+    observer.observe(heroSection);
+    if (contactSection) observer.observe(contactSection);
+  }
+</script>
